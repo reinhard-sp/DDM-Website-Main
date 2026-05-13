@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Motorpool Job Order System</title>
+<title>RequiSite - Motorpool-Warehouse Material Requisition System</title>
 <link rel="stylesheet" href="style.css"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
 </head>
@@ -11,12 +11,21 @@
 
 <!-- ==================== LOGIN PAGE ==================== -->
 <div id="login-page" class="login-bg">
-  <div class="login-card">
+  <div id="splash-screen" class="splash-screen" aria-hidden="true">
+    <div class="splash-brand">
+      <div class="splash-logo">
+        <img src="logo-vtlc.jpg" alt="VTLC Logo" />
+      </div>
+      <h1 class="splash-title">Vicente T. Lao Construction</h1>
+      <p class="splash-subtitle">RequiSite</p>
+    </div>
+  </div>
+  <div id="login-card" class="login-card login-card-hidden">
     <div class="login-icon">
       <img src="logo-vtlc.jpg" alt="VTLC Logo" />
     </div>
-    <h1 class="login-title">Motorpool Job Order System</h1>
-    <p class="login-subtitle">Enter password to access dashboard</p>
+    <h1 class="login-title">RequiSite</h1>
+    <p class="login-subtitle">Motorpool-Warehouse Material Requisition System</p>
     <div class="login-form">
       <label class="form-label">Password</label>
       <input type="password" id="password" class="form-input" placeholder="Enter password" onkeydown="if(event.key==='Enter')handleLogin()"/>
@@ -35,7 +44,7 @@
         <img src="logo-vtlc.jpg" alt="VTLC Logo" />
       </div>
       <div>
-        <div class="nav-title">Motorpool Job Orders</div>
+        <div class="nav-title">RequiSite</div>
         <div class="nav-subtitle">Management Dashboard</div>
       </div>
     </div>
@@ -70,15 +79,40 @@
         <p class="section-subtitle">Track and manage motorpool maintenance requests</p>
       </div>
       <div class="header-actions">
-        <button class="btn-filter" onclick="openFilterModal()">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
-          Filter
-        </button>
-        <button class="btn-filter btn-batch-print" onclick="openBatchPrint()">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
-          Batch Print
-        </button>
-        <button class="btn-new" onclick="openNewJobOrder()">+ New Job Order</button>
+        <div class="header-actions-left">
+          <div class="view-toggle" role="tablist" aria-label="Dashboard view toggle">
+            <button class="view-toggle-btn active" id="view-toggle-cards" data-label="Cards" aria-label="Cards view" title="Cards" onclick="setDashboardView('cards')">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="7" height="7" rx="1.5"/><rect x="14" y="4" width="7" height="7" rx="1.5"/><rect x="3" y="15" width="7" height="5" rx="1.5"/><rect x="14" y="15" width="7" height="5" rx="1.5"/></svg>
+            </button>
+            <button class="view-toggle-btn" id="view-toggle-table" data-label="Table" aria-label="Table view" title="Table" onclick="setDashboardView('table')">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="9" y1="4" x2="9" y2="20"/><line x1="15" y1="4" x2="15" y2="20"/></svg>
+            </button>
+          </div>
+          <div class="sort-control">
+            <label class="sort-label sort-label-icon" for="dashboard-sort" aria-label="Sort options" title="Sort options">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 6h8"/><path d="M11 12h5"/><path d="M11 18h2"/><path d="M3 6l3-3 3 3"/><path d="M6 3v18"/></svg>
+            </label>
+            <select id="dashboard-sort" class="sort-select" onchange="setDashboardSort(this.value)">
+              <option value="recent" selected>Recent first</option>
+              <option value="oldest">Oldest first</option>
+              <option value="priority-high">Urgent first</option>
+              <option value="priority-low">Not urgent first</option>
+              <option value="status">Status</option>
+              <option value="title">Title A-Z</option>
+            </select>
+          </div>
+          <button class="btn-filter" onclick="openFilterModal()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+            Filter
+          </button>
+        </div>
+        <div class="header-actions-right">
+          <button class="btn-filter btn-batch-print" onclick="openBatchPrint()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+            Batch Print
+          </button>
+          <button class="btn-new" onclick="openJobOrderSection()">+ Material Request</button>
+        </div>
       </div>
     </div>
 
@@ -162,6 +196,23 @@
           <button class="btn-view" onclick="openViewModal('JO-2026-004','Air Conditioning Repair','Ford Ranger - GHI 3456','noturgent','April 25, 2026','AC not cooling properly, needs diagnostic check','April 25, 2026')">View Details</button>
           <button class="btn-priority" onclick="openChangePriority('JO-2026-004','Air Conditioning Repair')">Change Priority</button>
         </div>
+      </div>
+    </div>
+    <div id="job-table-wrapper" class="job-table-wrapper hidden">
+      <div class="job-table-scroll">
+        <table class="job-table" aria-label="Job order table view">
+          <thead>
+            <tr>
+              <th>Job Order</th>
+              <th>Title</th>
+              <th>Vehicle</th>
+              <th>Date</th>
+              <th>Priority</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="job-table-body"></tbody>
+        </table>
       </div>
     </div>
     <div id="no-results" class="no-results hidden"><p>No job orders match the selected filters.</p></div>
@@ -268,10 +319,96 @@
   </div>
 </div>
 
-<!-- ==================== NEW JOB ORDER MODAL ==================== -->
+<!-- ==================== NEW JOB ORDER SECTION ==================== -->
+<div id="job-order-overlay" class="njo-overlay hidden" onclick="if(event.target===this)closeJobOrder()">
+  <div class="njo-box" id="job-order-box">
+    <div class="modal-header"><div><h2 class="modal-title">New Job Order Section</h2><p class="modal-id">Fill in the details below to create a new job order</p></div><button class="modal-close" onclick="closeJobOrder()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+    <div class="modal-divider"></div>
+    <div class="njo-body">
+      <div id="jo-form-error" class="settings-msg settings-msg-error hidden"></div>
+      <div class="njo-grid-2">
+        <div class="settings-field"><label class="settings-label">Driver/Operator <span class="req-star">*</span></label><input type="text" id="jo-driver" class="settings-input" placeholder="Enter driver/operator"/></div>
+        <div class="settings-field"><label class="settings-label">Date <span class="req-star">*</span></label><input type="date" id="jo-date" class="settings-input"/></div>
+      </div>
+      <div class="njo-grid-2">
+        <div class="settings-field"><label class="settings-label">Job Order Number/JO no. <span class="req-star">*</span></label><input type="text" id="jo-number" class="settings-input" readonly/></div>
+        <div class="settings-field"><label class="settings-label">Location <span class="req-star">*</span></label><input type="text" id="jo-location" class="settings-input" placeholder="Enter location"/></div>
+      </div>
+      <div class="njo-grid-2">
+        <div class="settings-field"><label class="settings-label">Type/Make <span class="req-star">*</span></label><input type="text" id="jo-type" class="settings-input" placeholder="Enter type/make"/></div>
+        <div class="settings-field"><label class="settings-label">Plate No. <span class="req-star">*</span></label><input type="text" id="jo-plate" class="settings-input" placeholder="Enter plate number"/></div>
+      </div>
+      <div class="settings-field"><label class="settings-label">Operator Complain <span class="req-star">*</span></label><textarea id="jo-complain" class="settings-input njo-textarea" placeholder="Describe the complaint"></textarea></div>
+      <div class="njo-grid-2">
+        <div class="settings-field"><label class="settings-label">Date and Time Encountered <span class="req-star">*</span></label><input type="datetime-local" id="jo-encountered" class="settings-input"/></div>
+        <div class="settings-field"><label class="settings-label">Reported By <span class="req-star">*</span></label><input type="text" id="jo-reported-by" class="settings-input" placeholder="Enter reporter"/></div>
+      </div>
+      <div class="njo-grid-2">
+        <div class="settings-field"><label class="settings-label">Estimated Hour(s) / Day(s) of Repair <span class="req-star">*</span></label><input type="text" id="jo-estimated" class="settings-input" placeholder="e.g. 2 hours / 1 day"/></div>
+        <div class="settings-field"><label class="settings-label">Inspected by <span class="req-star">*</span></label><input type="text" id="jo-inspected-by" class="settings-input" placeholder="Enter inspector"/></div>
+      </div>
+      <div class="settings-field"><label class="settings-label">Ref. Stock Withdrawal / MRS <span class="req-star">*</span></label><input type="text" id="jo-ref" class="settings-input" placeholder="Reference"/></div>
+      <div class="settings-field">
+        <label class="settings-label">Work Details</label>
+        <table id="jo-work-table" class="jo-work-table">
+          <thead>
+            <tr>
+              <th>Description of Work</th>
+              <th>Date / Time Attended</th>
+              <th>Date / Time Finished</th>
+              <th>Remarks</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="jo-work-tbody">
+          </tbody>
+        </table>
+        <button type="button" onclick="addWorkRow()" class="btn-secondary" style="margin-top:10px;">Add Work Item</button>
+      </div>
+      <div class="njo-grid-2">
+        <div class="settings-field"><label class="settings-label">Mechanic <span class="req-star">*</span></label><input type="text" id="jo-mechanic" class="settings-input" placeholder="Enter mechanic"/></div>
+        <div class="settings-field"><label class="settings-label">Total Man Hours <span class="req-star">*</span></label><input type="number" id="jo-total-hours" class="settings-input" placeholder="Total hours"/></div>
+      </div>
+      <div class="settings-field">
+        <label class="settings-label">Approvals</label>
+        <div class="signature-section">
+          <div class="signature-line">
+            <span>Chief Mechanic</span>
+            <div class="underline"></div>
+          </div>
+          <div class="signature-line">
+            <span>Motorpool Supervisor</span>
+            <div class="underline"></div>
+          </div>
+        </div>
+      </div>
+      <div class="settings-field">
+        <label class="settings-label">TRIAL RUN / TURN OVER</label>
+        <div class="trial-run-section">
+          <div class="remarks-box">
+            <div class="remarks-label">Remarks</div>
+            <textarea id="jo-trial-remarks" class="settings-input njo-textarea" placeholder="Enter remarks"></textarea>
+          </div>
+          <div class="njo-grid-2">
+            <div class="settings-field"><label class="settings-label">Conducted by</label><input type="text" id="jo-conducted-by" class="settings-input" placeholder="Enter conductor"/></div>
+            <div class="settings-field"><label class="settings-label">Date</label><input type="date" id="jo-conducted-date" class="settings-input"/></div>
+          </div>
+          <div class="njo-grid-2">
+            <div class="settings-field"><label class="settings-label">Accepted by</label><input type="text" id="jo-accepted-by" class="settings-input" placeholder="Enter acceptor"/></div>
+            <div class="settings-field"><label class="settings-label">Date</label><input type="date" id="jo-accepted-date" class="settings-input"/></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-divider"></div>
+    <div class="modal-footer"><button class="btn-secondary modal-close-btn" onclick="closeJobOrder()">Cancel</button><button class="btn-view" onclick="proceedToMaterialRequest()">Proceed to Material Request Form</button></div>
+  </div>
+</div>
+
+<!-- ==================== MATERIAL REQUISITION SECTION ==================== -->
 <div id="new-jo-overlay" class="njo-overlay hidden" onclick="if(event.target===this)closeNewJobOrder()">
   <div class="njo-box" id="njo-box">
-    <div class="modal-header"><div><h2 class="modal-title">New Job Order</h2><p class="modal-id">Fill in the details below to create a new job order</p></div><button class="modal-close" onclick="closeNewJobOrder()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+    <div class="modal-header"><div><h2 class="modal-title">Material Request Form</h2><p class="modal-id">Fill in the details below to request material</p></div><button class="modal-close" onclick="closeNewJobOrder()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
     <div class="modal-divider"></div>
     <div class="njo-body">
       <div id="njo-form-error" class="settings-msg settings-msg-error hidden"></div>
@@ -301,7 +438,7 @@
       </div>
     </div>
     <div class="modal-divider"></div>
-    <div class="modal-footer"><button class="btn-secondary modal-close-btn" onclick="closeNewJobOrder()">Cancel</button><button class="btn-view" onclick="continueToReview()">Continue to Review</button></div>
+    <div class="modal-footer"><button class="btn-secondary modal-close-btn" onclick="goBackToJobOrder()">Back to New Job Order Section</button><button class="btn-secondary modal-close-btn" onclick="closeNewJobOrder()">Cancel</button><button class="btn-view" onclick="continueToReview()">Continue to Review</button></div>
   </div>
 </div>
 
@@ -312,6 +449,17 @@
     <div class="modal-divider"></div>
     <div class="njo-body">
       <div class="review-banner"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><div><p class="review-banner-title">Review Your Information</p><p class="review-banner-sub">Please verify that all the information below is correct before submitting your job order.</p></div></div>
+      <h4 class="modal-section-title">Job Order Details</h4>
+      <div class="njo-grid-2"><div class="modal-info-cell"><span class="info-label">Driver/Operator</span><span class="info-value" id="rv-jo-driver"></span></div><div class="modal-info-cell"><span class="info-label">Date</span><span class="info-value" id="rv-jo-date"></span></div></div>
+      <div class="njo-grid-2"><div class="modal-info-cell"><span class="info-label">Job Order Number</span><span class="info-value" id="rv-jo-number"></span></div><div class="modal-info-cell"><span class="info-label">Location</span><span class="info-value" id="rv-jo-location"></span></div></div>
+      <div class="njo-grid-2"><div class="modal-info-cell"><span class="info-label">Type/Make</span><span class="info-value" id="rv-jo-type"></span></div><div class="modal-info-cell"><span class="info-label">Plate No.</span><span class="info-value" id="rv-jo-plate"></span></div></div>
+      <div class="modal-info-cell"><span class="info-label">Operator Complain</span><span class="info-value" id="rv-jo-complain"></span></div>
+      <div class="njo-grid-2"><div class="modal-info-cell"><span class="info-label">Date and Time Encountered</span><span class="info-value" id="rv-jo-encountered"></span></div><div class="modal-info-cell"><span class="info-label">Reported By</span><span class="info-value" id="rv-jo-reported-by"></span></div></div>
+      <div class="njo-grid-2"><div class="modal-info-cell"><span class="info-label">Estimated Repair Time</span><span class="info-value" id="rv-jo-estimated"></span></div><div class="modal-info-cell"><span class="info-label">Inspected by</span><span class="info-value" id="rv-jo-inspected-by"></span></div></div>
+      <div class="modal-info-cell"><span class="info-label">Ref. Stock Withdrawal / MRS</span><span class="info-value" id="rv-jo-ref"></span></div>
+      <div class="modal-info-cell"><span class="info-label">Mechanic</span><span class="info-value" id="rv-jo-mechanic"></span></div>
+      <div class="modal-info-cell"><span class="info-label">Total Man Hours</span><span class="info-value" id="rv-jo-total-hours"></span></div>
+      <h4 class="modal-section-title">Material Request Details</h4>
       <div class="njo-grid-2"><div class="modal-info-cell"><span class="info-label">Project/Department</span><span class="info-value" id="rv-dept"></span></div><div class="modal-info-cell"><span class="info-label">Location</span><span class="info-value" id="rv-location"></span></div></div>
       <div class="njo-grid-2"><div class="modal-info-cell"><span class="info-label">Date Requested</span><span class="info-value" id="rv-date-req"></span></div><div class="modal-info-cell"><span class="info-label">Date Required</span><span class="info-value" id="rv-date-reqd"></span></div></div>
       <div class="njo-grid-2"><div class="modal-info-cell"><span class="info-label">Item Code</span><span class="info-value" id="rv-item-code"></span></div><div class="modal-info-cell"><span class="info-label">Unit of Measurement</span><span class="info-value" id="rv-uom"></span></div></div>
@@ -386,6 +534,50 @@
 
 <!-- ==================== SCRIPT ==================== -->
 <script>
+var splashDuration = 1150;
+var cardRevealDelay = 180;
+var authSessionKey = 'requisite-authenticated';
+
+function showDashboardOnLoad() {
+  var loginPage = document.getElementById('login-page');
+  var dashboardPage = document.getElementById('dashboard-page');
+  var splash = document.getElementById('splash-screen');
+  var loginCard = document.getElementById('login-card');
+
+  if (loginPage) loginPage.classList.add('hidden');
+  if (dashboardPage) dashboardPage.classList.remove('hidden');
+  if (splash) splash.classList.add('hidden');
+  if (loginCard) {
+    loginCard.classList.remove('login-card-hidden');
+    loginCard.classList.remove('login-card-visible');
+  }
+
+  applyDashboardSort();
+  updateSortIndicator();
+  updateBadge();
+}
+
+window.addEventListener('load', function() {
+  if (sessionStorage.getItem(authSessionKey) === 'true') {
+    showDashboardOnLoad();
+    return;
+  }
+
+  var splash = document.getElementById('splash-screen');
+  var loginCard = document.getElementById('login-card');
+
+  updateSortIndicator();
+  requestAnimationFrame(function() {
+    setTimeout(function() {
+      if (splash) splash.classList.add('splash-screen-hidden');
+    }, splashDuration);
+
+    setTimeout(function() {
+      if (loginCard) loginCard.classList.add('login-card-visible');
+    }, splashDuration + cardRevealDelay);
+  }, splashDuration);
+});
+
 // ============================================================
 // STATE
 // ============================================================
@@ -415,16 +607,19 @@ function handleLogin() {
   var val = document.getElementById('password').value;
   var err = document.getElementById('login-error');
   if (val === currentPassword) {
+    sessionStorage.setItem(authSessionKey, 'true');
     document.getElementById('login-page').classList.add('hidden');
     document.getElementById('dashboard-page').classList.remove('hidden');
     err.classList.add('hidden');
     updateBadge();
+    applyDashboardSort();
   } else {
     err.classList.remove('hidden');
   }
 }
 
 function handleLogout() {
+  sessionStorage.removeItem(authSessionKey);
   ['dashboard-page','settings-page','inbox-panel','message-panel','batch-print-panel'].forEach(function(id){
     document.getElementById(id).classList.add('hidden');
   });
@@ -475,6 +670,213 @@ function selectFilterOption(groupId, btn) {
   btn.classList.add('active');
 }
 function openFilterModal() { openOverlay('filter-overlay',''); }
+
+function getVisibleJobCards() {
+  return Array.prototype.slice.call(document.querySelectorAll('#job-list .job-card')).filter(function(card) {
+    return card.style.display !== 'none';
+  });
+}
+
+function escapeHtml(text) {
+  return String(text)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function getBadgeClassByPriority(priority) {
+  return priorityBadgeClass[priority] || 'badge-doable';
+}
+
+function getBadgeClassByStatus(status) {
+  return statusBadgeClass[status] || '';
+}
+
+var dashboardView = 'cards';
+var dashboardSort = 'recent';
+
+function getPriorityRank(priority) {
+  return priority === 'urgent' ? 0 : 1;
+}
+
+function getSortIndicatorConfig(sort) {
+  var config = {
+    recent: { direction: 'desc', label: 'Recent first', directionLabel: 'descending' },
+    oldest: { direction: 'asc', label: 'Oldest first', directionLabel: 'ascending' },
+    'priority-high': { direction: 'asc', label: 'Urgent first', directionLabel: 'ascending' },
+    'priority-low': { direction: 'desc', label: 'Not urgent first', directionLabel: 'descending' },
+    status: { direction: 'asc', label: 'Status', directionLabel: 'ascending' },
+    title: { direction: 'asc', label: 'Title A-Z', directionLabel: 'ascending' }
+  };
+  return config[sort] || config.recent;
+}
+
+function updateSortIndicator() {
+  var label = document.querySelector('.sort-label-icon');
+  if (!label) return;
+  var config = getSortIndicatorConfig(dashboardSort);
+  var icon = config.direction === 'desc'
+    ? '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="M5 12l7 7 7-7"/></svg>'
+    : '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12l7-7 7 7"/></svg>';
+  label.innerHTML = icon;
+  label.title = 'Sorted by ' + config.label + ' (' + config.directionLabel + ')';
+  label.setAttribute('aria-label', 'Sort options, currently ' + config.label + ', ' + config.directionLabel + ' order');
+}
+
+function getStatusRank(status) {
+  var statusOrder = { pending: 0, approved: 1, processing: 2, completed: 3 };
+  return typeof statusOrder[status] === 'number' ? statusOrder[status] : 99;
+}
+
+function compareJobCards(cardA, cardB) {
+  var mode = dashboardSort || 'recent';
+  var dateA = cardA.dataset.date || '';
+  var dateB = cardB.dataset.date || '';
+  var priorityA = cardA.dataset.priority || 'noturgent';
+  var priorityB = cardB.dataset.priority || 'noturgent';
+  var statusA = cardA.dataset.status || 'pending';
+  var statusB = cardB.dataset.status || 'pending';
+  var titleA = (cardA.querySelector('.job-title') ? cardA.querySelector('.job-title').textContent : '').trim().toLowerCase();
+  var titleB = (cardB.querySelector('.job-title') ? cardB.querySelector('.job-title').textContent : '').trim().toLowerCase();
+
+  if (mode === 'oldest') {
+    return dateA.localeCompare(dateB) || titleA.localeCompare(titleB);
+  }
+  if (mode === 'priority-high') {
+    return getPriorityRank(priorityA) - getPriorityRank(priorityB) || dateB.localeCompare(dateA) || titleA.localeCompare(titleB);
+  }
+  if (mode === 'priority-low') {
+    return getPriorityRank(priorityB) - getPriorityRank(priorityA) || dateB.localeCompare(dateA) || titleA.localeCompare(titleB);
+  }
+  if (mode === 'status') {
+    return getStatusRank(statusA) - getStatusRank(statusB) || dateB.localeCompare(dateA) || titleA.localeCompare(titleB);
+  }
+  if (mode === 'title') {
+    return titleA.localeCompare(titleB) || dateB.localeCompare(dateA);
+  }
+  return dateB.localeCompare(dateA) || titleA.localeCompare(titleB);
+}
+
+function applyDashboardSort() {
+  var list = document.getElementById('job-list');
+  if (!list) return;
+  var cards = Array.prototype.slice.call(list.querySelectorAll('.job-card'));
+  cards.sort(compareJobCards);
+  cards.forEach(function(card) {
+    list.appendChild(card);
+  });
+}
+
+function setDashboardSort(sort) {
+  dashboardSort = sort;
+  applyDashboardSort();
+  updateSortIndicator();
+  if (dashboardView === 'table') renderJobTable();
+}
+
+function buildJobTableRow(card) {
+  var id = card.id.replace('card-', '');
+  var titleEl = card.querySelector('.job-title');
+  var vehicleEl = card.querySelector('.job-vehicle');
+  var descEl = card.querySelector('.job-desc');
+  var title = titleEl ? titleEl.textContent.trim() : '';
+  var vehicle = vehicleEl ? vehicleEl.textContent.trim() : '';
+  var desc = descEl ? descEl.textContent.trim() : '';
+  var date = formatDateForDisplay(card.dataset.date || '');
+  var priority = card.dataset.priority || 'noturgent';
+  var status = card.dataset.status || 'pending';
+  var priorityLabelText = priorityLabel[priority] || priority;
+  var statusLabelText = statusLabels[status] || status;
+  return '<tr>'
+    + '<td><button type="button" class="table-link-btn table-job-id" data-job-id="' + escapeHtml(id) + '" data-job-title="' + escapeHtml(title) + '">' + escapeHtml(id) + '</button></td>'
+    + '<td><button type="button" class="table-link-btn table-job-title-btn" data-job-id="' + escapeHtml(id) + '" data-job-title="' + escapeHtml(title) + '">' + escapeHtml(title) + '</button></td>'
+    + '<td>' + escapeHtml(vehicle) + '</td>'
+    + '<td>' + escapeHtml(date) + '</td>'
+    + '<td class="table-priority-cell" data-job-id="' + escapeHtml(id) + '" data-job-title="' + escapeHtml(title) + '" tabindex="0"><span class="badge ' + getBadgeClassByPriority(priority) + '">' + escapeHtml(priorityLabelText) + '</span></td>'
+    + '<td><span class="badge ' + getBadgeClassByStatus(status) + '">' + escapeHtml(statusLabelText) + '</span></td>'
+    + '</tr>';
+}
+
+function wireJobTableInteractions() {
+  var tbody = document.getElementById('job-table-body');
+  if (!tbody || tbody.dataset.wired === 'true') return;
+  tbody.dataset.wired = 'true';
+  tbody.addEventListener('click', function(event) {
+    var viewButton = event.target.closest('.table-link-btn');
+    if (viewButton) {
+      var jobId = viewButton.dataset.jobId || '';
+      var jobTitle = viewButton.dataset.jobTitle || '';
+      var card = document.getElementById('card-' + jobId);
+      if (!card) return;
+      openViewModal(
+        jobId,
+        jobTitle,
+        card.querySelector('.job-vehicle') ? card.querySelector('.job-vehicle').textContent.trim() : '',
+        card.dataset.priority || 'noturgent',
+        formatDateForDisplay(card.dataset.date || ''),
+        card.querySelector('.job-desc') ? card.querySelector('.job-desc').textContent.trim() : '',
+        formatDateForDisplay(card.dataset.date || '')
+      );
+      return;
+    }
+
+    var priorityCell = event.target.closest('.table-priority-cell');
+    if (priorityCell) {
+      openChangePriority(priorityCell.dataset.jobId || '', priorityCell.dataset.jobTitle || '');
+    }
+  });
+  tbody.addEventListener('keydown', function(event) {
+    if (event.key !== 'Enter' && event.key !== ' ') return;
+    var priorityCell = event.target.closest('.table-priority-cell');
+    if (!priorityCell) return;
+    event.preventDefault();
+    openChangePriority(priorityCell.dataset.jobId || '', priorityCell.dataset.jobTitle || '');
+  });
+}
+
+function renderJobTable() {
+  var tbody = document.getElementById('job-table-body');
+  var tableWrapper = document.getElementById('job-table-wrapper');
+  if (!tbody) return;
+  wireJobTableInteractions();
+  var cards = getVisibleJobCards();
+  if (cards.length === 0) {
+    tbody.innerHTML = '';
+    tableWrapper.classList.add('hidden');
+    document.getElementById('no-results').classList.remove('hidden');
+    return;
+  }
+  tableWrapper.classList.remove('hidden');
+  document.getElementById('no-results').classList.add('hidden');
+  tbody.innerHTML = cards.map(function(card) { return buildJobTableRow(card); }).join('');
+}
+
+function syncDashboardView() {
+  var cardList = document.getElementById('job-list');
+  var tableWrapper = document.getElementById('job-table-wrapper');
+  var cardsBtn = document.getElementById('view-toggle-cards');
+  var tableBtn = document.getElementById('view-toggle-table');
+  if (dashboardView === 'table') {
+    cardList.classList.add('hidden');
+    tableWrapper.classList.remove('hidden');
+    cardsBtn.classList.remove('active');
+    tableBtn.classList.add('active');
+    renderJobTable();
+  } else {
+    cardList.classList.remove('hidden');
+    tableWrapper.classList.add('hidden');
+    cardsBtn.classList.add('active');
+    tableBtn.classList.remove('active');
+  }
+}
+
+function setDashboardView(view) {
+  dashboardView = view;
+  syncDashboardView();
+}
+
 function applyFilters() {
   var pv = document.querySelector('#priority-group .filter-option-btn.active').dataset.value;
   var sv = document.querySelector('#status-group .filter-option-btn.active').dataset.value;
@@ -489,6 +891,7 @@ function applyFilters() {
     if (pm&&sm&&fm&&tm){c.style.display='';any=true;}else c.style.display='none';
   });
   document.getElementById('no-results').classList.toggle('hidden',any);
+  if (dashboardView === 'table') renderJobTable();
   closeModal('filter-overlay');
 }
 function resetFilters() {
@@ -498,6 +901,7 @@ function resetFilters() {
   document.querySelectorAll('#status-group .filter-option-btn').forEach(function(b,i){b.classList.toggle('active',i===0);});
   document.querySelectorAll('.job-card').forEach(function(c){c.style.display='';});
   document.getElementById('no-results').classList.add('hidden');
+  if (dashboardView === 'table') renderJobTable();
   closeModal('filter-overlay');
 }
 
@@ -565,7 +969,110 @@ function applyPriorityChange() {
   card.dataset.priority=selectedPriorityVal;
   var b=card.querySelector('.job-title-row .badge');
   if(b){b.className='badge '+(priorityBadgeClass[selectedPriorityVal]||'badge-doable');b.textContent=priorityLabel[selectedPriorityVal];}
+  applyDashboardSort();
+  if (dashboardView === 'table') renderJobTable();
   closeModal('priority-overlay');
+}
+
+// ============================================================
+// JOB ORDER SECTION
+// ============================================================
+var jobOrderData = {};
+
+function openJobOrderSection() {
+  // Generate JO number
+  var joNumber = 'JO-' + new Date().getFullYear() + '-' + String(njoCounter + 1).padStart(3, '0');
+  document.getElementById('jo-number').value = joNumber;
+  document.getElementById('jo-date').value = new Date().toISOString().split('T')[0];
+  document.getElementById('jo-form-error').classList.add('hidden');
+  // Clear work table
+  document.getElementById('jo-work-tbody').innerHTML = '';
+  addWorkRow(); // Add one empty row
+  document.getElementById('job-order-overlay').classList.remove('hidden');
+  document.getElementById('job-order-box').scrollTop = 0;
+  document.body.style.overflow = 'hidden';
+}
+
+function closeJobOrder() {
+  document.getElementById('job-order-overlay').classList.add('hidden');
+  document.body.style.overflow = '';
+}
+
+function addWorkRow() {
+  var tbody = document.getElementById('jo-work-tbody');
+  var row = document.createElement('tr');
+  row.innerHTML = `
+    <td><input type="text" placeholder="Description of work"></td>
+    <td><input type="datetime-local"></td>
+    <td><input type="datetime-local"></td>
+    <td><textarea placeholder="Remarks"></textarea></td>
+    <td><button class="remove-btn" onclick="removeWorkRow(this)">Remove</button></td>
+  `;
+  tbody.appendChild(row);
+}
+
+function removeWorkRow(btn) {
+  var row = btn.closest('tr');
+  if (document.querySelectorAll('#jo-work-tbody tr').length > 1) {
+    row.remove();
+  }
+}
+
+function proceedToMaterialRequest() {
+  // Collect job order data
+  jobOrderData = {
+    driver: document.getElementById('jo-driver').value.trim(),
+    date: document.getElementById('jo-date').value,
+    number: document.getElementById('jo-number').value,
+    location: document.getElementById('jo-location').value.trim(),
+    type: document.getElementById('jo-type').value.trim(),
+    plate: document.getElementById('jo-plate').value.trim(),
+    complain: document.getElementById('jo-complain').value.trim(),
+    encountered: document.getElementById('jo-encountered').value,
+    reportedBy: document.getElementById('jo-reported-by').value.trim(),
+    estimated: document.getElementById('jo-estimated').value.trim(),
+    inspectedBy: document.getElementById('jo-inspected-by').value.trim(),
+    ref: document.getElementById('jo-ref').value.trim(),
+    workDetails: [],
+    mechanic: document.getElementById('jo-mechanic').value.trim(),
+    totalHours: document.getElementById('jo-total-hours').value,
+    trialRemarks: document.getElementById('jo-trial-remarks').value.trim(),
+    conductedBy: document.getElementById('jo-conducted-by').value.trim(),
+    conductedDate: document.getElementById('jo-conducted-date').value,
+    acceptedBy: document.getElementById('jo-accepted-by').value.trim(),
+    acceptedDate: document.getElementById('jo-accepted-date').value
+  };
+
+  // Collect work details
+  var rows = document.querySelectorAll('#jo-work-tbody tr');
+  rows.forEach(function(row) {
+    var inputs = row.querySelectorAll('input, textarea');
+    jobOrderData.workDetails.push({
+      description: inputs[0].value.trim(),
+      attended: inputs[1].value,
+      finished: inputs[2].value,
+      remarks: inputs[3].value.trim()
+    });
+  });
+
+  // Validate required fields
+  var required = ['driver', 'date', 'location', 'type', 'plate', 'complain', 'encountered', 'reportedBy', 'estimated', 'inspectedBy', 'mechanic'];
+  var missing = required.filter(function(field) { return !jobOrderData[field]; });
+  if (missing.length > 0) {
+    document.getElementById('jo-form-error').textContent = 'Please fill in all required fields: ' + missing.join(', ');
+    document.getElementById('jo-form-error').classList.remove('hidden');
+    return;
+  }
+
+  // Close job order modal and open material request
+  document.getElementById('job-order-overlay').classList.add('hidden');
+  openNewJobOrder();
+}
+
+function goBackToJobOrder() {
+  document.getElementById('new-jo-overlay').classList.add('hidden');
+  document.getElementById('job-order-overlay').classList.remove('hidden');
+  document.getElementById('job-order-box').scrollTop = 0;
 }
 
 // ============================================================
@@ -619,6 +1126,24 @@ function continueToReview() {
     return;
   }
   err.classList.add('hidden');
+
+  // Populate Job Order details
+  document.getElementById('rv-jo-driver').textContent = jobOrderData.driver;
+  document.getElementById('rv-jo-date').textContent = formatDateForDisplay(jobOrderData.date);
+  document.getElementById('rv-jo-number').textContent = jobOrderData.number;
+  document.getElementById('rv-jo-location').textContent = jobOrderData.location;
+  document.getElementById('rv-jo-type').textContent = jobOrderData.type;
+  document.getElementById('rv-jo-plate').textContent = jobOrderData.plate;
+  document.getElementById('rv-jo-complain').textContent = jobOrderData.complain;
+  document.getElementById('rv-jo-encountered').textContent = jobOrderData.encountered;
+  document.getElementById('rv-jo-reported-by').textContent = jobOrderData.reportedBy;
+  document.getElementById('rv-jo-estimated').textContent = jobOrderData.estimated;
+  document.getElementById('rv-jo-inspected-by').textContent = jobOrderData.inspectedBy;
+  document.getElementById('rv-jo-ref').textContent = jobOrderData.ref;
+  document.getElementById('rv-jo-mechanic').textContent = jobOrderData.mechanic;
+  document.getElementById('rv-jo-total-hours').textContent = jobOrderData.totalHours;
+
+  // Populate Material Request details
   document.getElementById('rv-dept').textContent=dept;
   document.getElementById('rv-location').textContent=loc;
   document.getElementById('rv-date-req').textContent=formatDateForDisplay(dr);
@@ -683,6 +1208,8 @@ function submitJobOrder() {
   document.getElementById('no-results').classList.add('hidden');
   document.getElementById('confirm-jo-overlay').classList.add('hidden');
   document.getElementById('new-jo-overlay').classList.add('hidden');
+  applyDashboardSort();
+  if (dashboardView === 'table') renderJobTable();
   document.body.style.overflow='';
 }
 
