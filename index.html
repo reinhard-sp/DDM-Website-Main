@@ -306,11 +306,39 @@
     <div class="modal-body">
       <div class="modal-banner"><div class="modal-banner-left"><h3 class="modal-banner-title" id="modal-banner-title"></h3><p class="modal-banner-vehicle" id="modal-banner-vehicle"></p></div><span class="badge" id="modal-banner-badge"></span></div>
       <h4 class="modal-section-title">Job Order Information</h4>
-      <div class="modal-info-grid"><div class="modal-info-cell"><span class="info-label">Job Order ID</span><span class="info-value" id="modal-info-id"></span></div><div class="modal-info-cell"><span class="info-label">Date</span><span class="info-value" id="modal-info-date"></span></div><div class="modal-info-cell"><span class="info-label">Vehicle</span><span class="info-value" id="modal-info-vehicle"></span></div><div class="modal-info-cell"><span class="info-label">Priority Level</span><span class="badge" id="modal-info-priority"></span></div></div>
+      <div class="modal-info-grid">
+        <div class="modal-info-cell"><span class="info-label">Job Order ID</span><span class="info-value" id="modal-info-id"></span></div>
+        <div class="modal-info-cell"><span class="info-label">Date</span><span class="info-value" id="modal-info-date"></span></div>
+        <div class="modal-info-cell"><span class="info-label">Driver/Operator</span><span class="info-value" id="modal-info-driver"></span></div>
+        <div class="modal-info-cell"><span class="info-label">Vehicle</span><span class="info-value" id="modal-info-vehicle"></span></div>
+        <div class="modal-info-cell"><span class="info-label">Plate No.</span><span class="info-value" id="modal-info-plate"></span></div>
+        <div class="modal-info-cell"><span class="info-label">Type/Make</span><span class="info-value" id="modal-info-type"></span></div>
+        <div class="modal-info-cell"><span class="info-label">Date/Time Encountered</span><span class="info-value" id="modal-info-encountered"></span></div>
+        <div class="modal-info-cell"><span class="info-label">Reported By</span><span class="info-value" id="modal-info-reported-by"></span></div>
+        <div class="modal-info-cell"><span class="info-label">Estimated Repair Time</span><span class="info-value" id="modal-info-estimated"></span></div>
+        <div class="modal-info-cell"><span class="info-label">Inspected By</span><span class="info-value" id="modal-info-inspected-by"></span></div>
+        <div class="modal-info-cell"><span class="info-label">Ref. Stock Withdrawal / MRS</span><span class="info-value" id="modal-info-ref"></span></div>
+        <div class="modal-info-cell"><span class="info-label">Mechanic</span><span class="info-value" id="modal-info-mechanic"></span></div>
+        <div class="modal-info-cell"><span class="info-label">Total Man Hours</span><span class="info-value" id="modal-info-total-hours"></span></div>
+      </div>
+      <h4 class="modal-section-title">Operator Complaint</h4>
+      <div class="modal-desc-box"><p id="modal-info-complain"></p></div>
       <h4 class="modal-section-title">Material Requisition Status</h4>
       <div class="modal-status-box"><div class="modal-status-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><div><span class="info-label">Current Status</span><div style="margin-top:6px"><span class="badge" id="modal-req-status"></span></div></div></div>
       <h4 class="modal-section-title">Description</h4>
       <div class="modal-desc-box"><p id="modal-desc"></p></div>
+      <h4 class="modal-section-title">Material Request Details</h4>
+      <div class="modal-info-grid">
+        <div class="modal-info-cell"><span class="info-label">Project/Department</span><span class="info-value" id="modal-mr-dept"></span></div>
+        <div class="modal-info-cell"><span class="info-label">Location</span><span class="info-value" id="modal-mr-location"></span></div>
+        <div class="modal-info-cell"><span class="info-label">Date Requested</span><span class="info-value" id="modal-mr-date-req"></span></div>
+        <div class="modal-info-cell"><span class="info-label">Date Required</span><span class="info-value" id="modal-mr-date-reqd"></span></div>
+        <div class="modal-info-cell"><span class="info-label">Item Code</span><span class="info-value" id="modal-mr-item-code"></span></div>
+        <div class="modal-info-cell"><span class="info-label">Unit of Measurement</span><span class="info-value" id="modal-mr-uom"></span></div>
+        <div class="modal-info-cell"><span class="info-label">Quantity</span><span class="info-value" id="modal-mr-qty"></span></div>
+        <div class="modal-info-cell"><span class="info-label">Priority Level</span><span class="badge" id="modal-mr-priority"></span></div>
+      </div>
+      <div class="modal-info-cell"><span class="info-label">Purpose/Pay Item</span><span class="info-value" id="modal-mr-purpose"></span></div>
       <h4 class="modal-section-title">Timeline</h4>
       <div class="modal-timeline"><div class="timeline-item"><span class="timeline-dot dot-blue"></span><div><p class="timeline-event">Job Order Created</p><p class="timeline-date" id="modal-timeline-created"></p></div></div><div class="timeline-item"><span class="timeline-dot dot-green"></span><div><p class="timeline-event" id="modal-timeline-status-label"></p><p class="timeline-date">Recent</p></div></div></div>
       <div class="modal-divider"></div>
@@ -909,25 +937,56 @@ function resetFilters() {
 // VIEW DETAILS MODAL
 // ============================================================
 function openViewModal(id, title, vehicle, priority, date, desc, createdDate) {
-  var status = cardStatuses[id] || 'pending';
-  var label  = statusLabels[status];
+  var card = document.getElementById('card-' + id);
+  var status = card ? (card.dataset.status || 'pending') : (cardStatuses[id] || 'pending');
+  var label = statusLabels[status] || 'Pending';
+  var priorityValue = card ? (card.dataset.priority || priority) : priority;
+  var bannerTitle = card && card.querySelector('.job-title') ? card.querySelector('.job-title').textContent.trim() : title;
+  var bannerVehicle = card && card.querySelector('.job-vehicle') ? card.querySelector('.job-vehicle').textContent.trim() : vehicle;
+  var modalDesc = card ? (card.dataset.joComplain || desc) : desc;
+  var mrPriority = card ? (card.dataset.mrPriority || priorityValue) : priorityValue;
+
   document.getElementById('modal-id').textContent = id;
-  document.getElementById('modal-banner-title').textContent = title;
-  document.getElementById('modal-banner-vehicle').textContent = vehicle;
+  document.getElementById('modal-banner-title').textContent = bannerTitle;
+  document.getElementById('modal-banner-vehicle').textContent = bannerVehicle;
   document.getElementById('modal-info-id').textContent = id;
-  document.getElementById('modal-info-date').textContent = date;
-  document.getElementById('modal-info-vehicle').textContent = vehicle;
-  document.getElementById('modal-desc').textContent = desc;
+  document.getElementById('modal-info-date').textContent = card ? formatDateForDisplay(card.dataset.joDate || date) : date;
+  document.getElementById('modal-info-driver').textContent = card ? (card.dataset.joDriver || '') : '';
+  document.getElementById('modal-info-vehicle').textContent = bannerVehicle;
+  document.getElementById('modal-info-plate').textContent = card ? (card.dataset.joPlate || '') : '';
+  document.getElementById('modal-info-type').textContent = card ? (card.dataset.joType || '') : '';
+  document.getElementById('modal-info-encountered').textContent = card ? (card.dataset.joEncountered || '') : '';
+  document.getElementById('modal-info-reported-by').textContent = card ? (card.dataset.joReportedBy || '') : '';
+  document.getElementById('modal-info-estimated').textContent = card ? (card.dataset.joEstimated || '') : '';
+  document.getElementById('modal-info-inspected-by').textContent = card ? (card.dataset.joInspectedBy || '') : '';
+  document.getElementById('modal-info-ref').textContent = card ? (card.dataset.joRef || '') : '';
+  document.getElementById('modal-info-mechanic').textContent = card ? (card.dataset.joMechanic || '') : '';
+  document.getElementById('modal-info-total-hours').textContent = card ? (card.dataset.joTotalHours || '') : '';
+  document.getElementById('modal-info-complain').textContent = card ? (card.dataset.joComplain || '') : '';
+  document.getElementById('modal-desc').textContent = modalDesc;
+  document.getElementById('modal-mr-dept').textContent = card ? (card.dataset.mrDept || '') : '';
+  document.getElementById('modal-mr-location').textContent = card ? (card.dataset.mrLocation || '') : '';
+  document.getElementById('modal-mr-date-req').textContent = card ? formatDateForDisplay(card.dataset.mrDateReq || '') : '';
+  document.getElementById('modal-mr-date-reqd').textContent = card ? formatDateForDisplay(card.dataset.mrDateReqd || '') : '';
+  document.getElementById('modal-mr-item-code').textContent = card ? (card.dataset.mrItemCode || '') : '';
+  document.getElementById('modal-mr-uom').textContent = card ? (card.dataset.mrUom || '') : '';
+  document.getElementById('modal-mr-qty').textContent = card ? (card.dataset.mrQty || '') : '';
+  document.getElementById('modal-mr-purpose').textContent = card ? (card.dataset.mrPurpose || '') : '';
+  document.getElementById('modal-mr-priority').className = 'badge ' + (priorityBadgeClass[mrPriority] || 'badge-doable');
+  document.getElementById('modal-mr-priority').textContent = priorityLabel[mrPriority] || mrPriority;
   document.getElementById('modal-timeline-created').textContent = createdDate;
   document.getElementById('modal-timeline-status-label').textContent = 'Status Updated to ' + label;
+
   var pb = document.getElementById('modal-banner-badge');
-  pb.className = 'badge ' + (priorityBadgeClass[priority]||'badge-doable');
-  pb.textContent = priorityLabel[priority]||priority;
+  pb.className = 'badge ' + (priorityBadgeClass[priorityValue] || 'badge-doable');
+  pb.textContent = priorityLabel[priorityValue] || priorityValue;
   var pi = document.getElementById('modal-info-priority');
-  pi.className = 'badge ' + (priorityBadgeClass[priority]||'badge-doable');
-  pi.textContent = priorityLabel[priority]||priority;
+  if (pi) {
+    pi.className = 'badge ' + (priorityBadgeClass[priorityValue] || 'badge-doable');
+    pi.textContent = priorityLabel[priorityValue] || priorityValue;
+  }
   var rb = document.getElementById('modal-req-status');
-  rb.className = 'badge ' + (statusBadgeClass[status]||'');
+  rb.className = 'badge ' + (statusBadgeClass[status] || '');
   rb.textContent = label;
   openOverlay('modal-overlay','modal-box');
 }
@@ -1177,11 +1236,47 @@ function submitJobOrder() {
   var displayDate=formatDateForDisplay(dateReq);
   cardStatuses[newId]='pending';
   cardPriorities[newId]=priority;
+  var escapeAttr = function(str) {
+    return String(str || '').replace(/\\/g,'\\\\').replace(/'/g,"\\'").replace(/"/g,'&quot;');
+  };
   var sd=desc.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
   var sl=(dept+' — '+loc).replace(/\\/g,'\\\\').replace(/'/g,"\\'");
   var sp=purpose.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
   var isU=priority==='urgent';
-  var html='<div class="job-card" id="card-'+newId+'" data-priority="'+priority+'" data-status="pending" data-date="'+dateReq+'">'
+  var dr = document.getElementById('njo-date-req').value;
+  var drd = document.getElementById('njo-date-reqd').value;
+  var code = document.getElementById('njo-item-code').value.trim();
+  var uom = document.getElementById('njo-uom').value;
+  var qty = document.getElementById('njo-qty').value.trim();
+  var cardDriver = escapeAttr(jobOrderData.driver);
+  var cardJoDate = escapeAttr(jobOrderData.date);
+  var cardLocation = escapeAttr(jobOrderData.location);
+  var cardType = escapeAttr(jobOrderData.type);
+  var cardPlate = escapeAttr(jobOrderData.plate);
+  var cardComplain = escapeAttr(jobOrderData.complain);
+  var cardEncountered = escapeAttr(jobOrderData.encountered);
+  var cardReportedBy = escapeAttr(jobOrderData.reportedBy);
+  var cardEstimated = escapeAttr(jobOrderData.estimated);
+  var cardInspectedBy = escapeAttr(jobOrderData.inspectedBy);
+  var cardRef = escapeAttr(jobOrderData.ref);
+  var cardMechanic = escapeAttr(jobOrderData.mechanic);
+  var cardTotalHours = escapeAttr(jobOrderData.totalHours);
+  var cardTrialRemarks = escapeAttr(jobOrderData.trialRemarks);
+  var cardConductedBy = escapeAttr(jobOrderData.conductedBy);
+  var cardConductedDate = escapeAttr(jobOrderData.conductedDate);
+  var cardAcceptedBy = escapeAttr(jobOrderData.acceptedBy);
+  var cardAcceptedDate = escapeAttr(jobOrderData.acceptedDate);
+  var cardWorkDetails = escapeAttr(JSON.stringify(jobOrderData.workDetails || []));
+  var cardMrDept = escapeAttr(dept);
+  var cardMrLocation = escapeAttr(loc);
+  var cardMrDateReq = escapeAttr(dr);
+  var cardMrDateReqd = escapeAttr(drd);
+  var cardMrItemCode = escapeAttr(code);
+  var cardMrUom = escapeAttr(uom);
+  var cardMrQty = escapeAttr(qty);
+  var cardMrPurpose = escapeAttr(purpose);
+  var cardMrPriority = escapeAttr(priority);
+  var html='<div class="job-card" id="card-'+newId+'" data-priority="'+priority+'" data-status="pending" data-date="'+dateReq+'" data-jo-driver="'+cardDriver+'" data-jo-date="'+cardJoDate+'" data-jo-number="'+newId+'" data-jo-location="'+cardLocation+'" data-jo-type="'+cardType+'" data-jo-plate="'+cardPlate+'" data-jo-complain="'+cardComplain+'" data-jo-encountered="'+cardEncountered+'" data-jo-reported-by="'+cardReportedBy+'" data-jo-estimated="'+cardEstimated+'" data-jo-inspected-by="'+cardInspectedBy+'" data-jo-ref="'+cardRef+'" data-jo-mechanic="'+cardMechanic+'" data-jo-total-hours="'+cardTotalHours+'" data-jo-trial-remarks="'+cardTrialRemarks+'" data-jo-conducted-by="'+cardConductedBy+'" data-jo-conducted-date="'+cardConductedDate+'" data-jo-accepted-by="'+cardAcceptedBy+'" data-jo-accepted-date="'+cardAcceptedDate+'" data-jo-work-details="'+cardWorkDetails+'" data-mr-dept="'+cardMrDept+'" data-mr-location="'+cardMrLocation+'" data-mr-date-req="'+cardMrDateReq+'" data-mr-date-reqd="'+cardMrDateReqd+'" data-mr-item-code="'+cardMrItemCode+'" data-mr-uom="'+cardMrUom+'" data-mr-qty="'+cardMrQty+'" data-mr-purpose="'+cardMrPurpose+'" data-mr-priority="'+cardMrPriority+'">'
     +'<div class="job-card-top"><div class="job-left">'
     +'<div class="job-title-row"><h3 class="job-title">'+desc+'</h3><span class="badge '+(isU?'badge-urgent':'badge-doable')+'">'+(isU?'Urgent':'Not Urgent')+'</span></div>'
     +'<p class="job-vehicle">'+dept+' — '+loc+'</p>'
