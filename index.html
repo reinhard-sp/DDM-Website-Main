@@ -95,8 +95,8 @@
             <select id="dashboard-sort" class="sort-select" onchange="setDashboardSort(this.value)">
               <option value="recent" selected>Recent first</option>
               <option value="oldest">Oldest first</option>
-              <option value="priority-high">Urgent first</option>
-              <option value="priority-low">Not urgent first</option>
+              <option value="priority-high">High first</option>
+              <option value="priority-low">Low first</option>
               <option value="status">Status</option>
               <option value="title">Title A-Z</option>
             </select>
@@ -118,10 +118,10 @@
 
     <div class="job-list" id="job-list">
       <!-- Card 1 -->
-      <div class="job-card" id="card-JO-2026-001" data-priority="urgent" data-status="approved" data-date="2026-04-28">
+      <div class="job-card" id="card-JO-2026-001" data-priority="high" data-status="approved" data-date="2026-04-28">
         <div class="job-card-top">
           <div class="job-left">
-            <div class="job-title-row"><h3 class="job-title">Engine Oil Change</h3><span class="badge badge-urgent">Urgent</span></div>
+            <div class="job-title-row"><h3 class="job-title">Engine Oil Change</h3><span class="badge badge-urgent">High</span></div>
             <p class="job-vehicle">Toyota Hilux - ABC 1234</p>
             <p class="job-desc">Routine engine oil change and filter replacement</p>
             <div class="job-meta">
@@ -133,15 +133,15 @@
         </div>
         <div class="job-card-divider"></div>
         <div class="job-actions">
-          <button class="btn-view" onclick="openViewModal('JO-2026-001','Engine Oil Change','Toyota Hilux - ABC 1234','urgent','April 28, 2026','Routine engine oil change and filter replacement','April 28, 2026')">View Details</button>
+          <button class="btn-view" onclick="openViewModal('JO-2026-001','Engine Oil Change','Toyota Hilux - ABC 1234','high','April 28, 2026','Routine engine oil change and filter replacement','April 28, 2026')">View Details</button>
           <button class="btn-priority" onclick="openChangePriority('JO-2026-001','Engine Oil Change')">Change Priority</button>
         </div>
       </div>
       <!-- Card 2 -->
-      <div class="job-card" id="card-JO-2026-002" data-priority="urgent" data-status="processing" data-date="2026-04-27">
+      <div class="job-card" id="card-JO-2026-002" data-priority="medium" data-status="processing" data-date="2026-04-27">
         <div class="job-card-top">
           <div class="job-left">
-            <div class="job-title-row"><h3 class="job-title">Brake Pad Replacement</h3><span class="badge badge-urgent">Urgent</span></div>
+            <div class="job-title-row"><h3 class="job-title">Brake Pad Replacement</h3><span class="badge badge-medium">Medium</span></div>
             <p class="job-vehicle">Isuzu D-Max - XYZ 5678</p>
             <p class="job-desc">Front and rear brake pad replacement needed</p>
             <div class="job-meta">
@@ -153,15 +153,15 @@
         </div>
         <div class="job-card-divider"></div>
         <div class="job-actions">
-          <button class="btn-view" onclick="openViewModal('JO-2026-002','Brake Pad Replacement','Isuzu D-Max - XYZ 5678','urgent','April 27, 2026','Front and rear brake pad replacement needed','April 27, 2026')">View Details</button>
+          <button class="btn-view" onclick="openViewModal('JO-2026-002','Brake Pad Replacement','Isuzu D-Max - XYZ 5678','medium','April 27, 2026','Front and rear brake pad replacement needed','April 27, 2026')">View Details</button>
           <button class="btn-priority" onclick="openChangePriority('JO-2026-002','Brake Pad Replacement')">Change Priority</button>
         </div>
       </div>
       <!-- Card 3 -->
-      <div class="job-card" id="card-JO-2026-003" data-priority="noturgent" data-status="completed" data-date="2026-04-26">
+      <div class="job-card" id="card-JO-2026-003" data-priority="low" data-status="completed" data-date="2026-04-26">
         <div class="job-card-top">
           <div class="job-left">
-            <div class="job-title-row"><h3 class="job-title">Tire Rotation</h3><span class="badge badge-doable">Standard</span></div>
+            <div class="job-title-row"><h3 class="job-title">Tire Rotation</h3><span class="badge badge-doable">Low</span></div>
             <p class="job-vehicle">Mitsubishi L300 - DEF 9012</p>
             <p class="job-desc">Regular tire rotation service</p>
             <div class="job-meta">
@@ -173,15 +173,15 @@
         </div>
         <div class="job-card-divider"></div>
         <div class="job-actions">
-          <button class="btn-view" onclick="openViewModal('JO-2026-003','Tire Rotation','Mitsubishi L300 - DEF 9012','noturgent','April 26, 2026','Regular tire rotation service','April 26, 2026')">View Details</button>
+          <button class="btn-view" onclick="openViewModal('JO-2026-003','Tire Rotation','Mitsubishi L300 - DEF 9012','low','April 26, 2026','Regular tire rotation service','April 26, 2026')">View Details</button>
           <button class="btn-priority" onclick="openChangePriority('JO-2026-003','Tire Rotation')">Change Priority</button>
         </div>
       </div>
       <!-- Card 4 -->
-      <div class="job-card" id="card-JO-2026-004" data-priority="noturgent" data-status="pending" data-date="2026-04-25">
+      <div class="job-card" id="card-JO-2026-004" data-priority="medium" data-status="pending" data-date="2026-04-25">
         <div class="job-card-top">
           <div class="job-left">
-            <div class="job-title-row"><h3 class="job-title">Air Conditioning Repair</h3><span class="badge badge-doable">Standard</span></div>
+            <div class="job-title-row"><h3 class="job-title">Air Conditioning Repair</h3><span class="badge badge-medium">Medium</span></div>
             <p class="job-vehicle">Ford Ranger - GHI 3456</p>
             <p class="job-desc">AC not cooling properly, needs diagnostic check</p>
             <div class="job-meta">
@@ -193,7 +193,7 @@
         </div>
         <div class="job-card-divider"></div>
         <div class="job-actions">
-          <button class="btn-view" onclick="openViewModal('JO-2026-004','Air Conditioning Repair','Ford Ranger - GHI 3456','noturgent','April 25, 2026','AC not cooling properly, needs diagnostic check','April 25, 2026')">View Details</button>
+          <button class="btn-view" onclick="openViewModal('JO-2026-004','Air Conditioning Repair','Ford Ranger - GHI 3456','medium','April 25, 2026','AC not cooling properly, needs diagnostic check','April 25, 2026')">View Details</button>
           <button class="btn-priority" onclick="openChangePriority('JO-2026-004','Air Conditioning Repair')">Change Priority</button>
         </div>
       </div>
@@ -271,7 +271,7 @@
     <div class="modal-divider"></div>
     <div class="modal-body filter-body">
       <div class="filter-section"><h4 class="filter-section-title">Date Range</h4><div class="filter-date-row"><div class="filter-date-group"><label class="filter-date-label">From</label><input type="date" id="filter-date-from" class="filter-date-input"/></div><div class="filter-date-group"><label class="filter-date-label">To</label><input type="date" id="filter-date-to" class="filter-date-input"/></div></div></div>
-      <div class="filter-section"><h4 class="filter-section-title">Priority Level</h4><div class="filter-btn-group" id="priority-group"><button class="filter-option-btn active" data-value="all" onclick="selectFilterOption('priority-group',this)">All</button><button class="filter-option-btn" data-value="urgent" onclick="selectFilterOption('priority-group',this)">Urgent</button><button class="filter-option-btn" data-value="noturgent" onclick="selectFilterOption('priority-group',this)">Standard</button></div></div>
+      <div class="filter-section"><h4 class="filter-section-title">Priority Level</h4><div class="filter-btn-group" id="priority-group"><button class="filter-option-btn active" data-value="all" onclick="selectFilterOption('priority-group',this)">All</button><button class="filter-option-btn" data-value="high" onclick="selectFilterOption('priority-group',this)">High</button><button class="filter-option-btn" data-value="medium" onclick="selectFilterOption('priority-group',this)">Medium</button><button class="filter-option-btn" data-value="low" onclick="selectFilterOption('priority-group',this)">Low</button></div></div>
       <div class="filter-section"><h4 class="filter-section-title">Material Requisition Status</h4><div class="filter-btn-group filter-btn-grid" id="status-group"><button class="filter-option-btn active" data-value="all" onclick="selectFilterOption('status-group',this)">All</button><button class="filter-option-btn" data-value="pending" onclick="selectFilterOption('status-group',this)">Pending</button><button class="filter-option-btn" data-value="approved" onclick="selectFilterOption('status-group',this)">Approved</button><button class="filter-option-btn" data-value="processing" onclick="selectFilterOption('status-group',this)">Processing</button><button class="filter-option-btn" data-value="completed" onclick="selectFilterOption('status-group',this)">Completed</button></div></div>
     </div>
     <div class="modal-divider"></div>
@@ -288,8 +288,9 @@
       <h4 class="modal-section-title">Select Priority Level</h4>
       <p class="update-hint">Choose the priority level for this job order.</p>
       <div class="status-option-grid">
-        <div class="status-option status-opt-urgent-prio" id="prio-opt-urgent" onclick="selectPriorityChange('urgent')"><div class="status-opt-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#e85d5d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div><p class="status-opt-title">Urgent</p><p class="status-opt-sub">Requires immediate attention</p></div><span class="status-check-icon hidden"><svg width="18" height="18" viewBox="0 0 24 24" fill="#2563eb"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5l-4-4 1.41-1.41L10 13.67l6.59-6.59L18 8.5l-8 8z"/></svg></span></div>
-        <div class="status-option status-opt-noturgent-prio" id="prio-opt-noturgent" onclick="selectPriorityChange('noturgent')"><div class="status-opt-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><div><p class="status-opt-title">Standard</p><p class="status-opt-sub">Can be scheduled normally</p></div><span class="status-check-icon hidden"><svg width="18" height="18" viewBox="0 0 24 24" fill="#2563eb"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5l-4-4 1.41-1.41L10 13.67l6.59-6.59L18 8.5l-8 8z"/></svg></span></div>
+        <div class="status-option status-opt-high-prio" id="prio-opt-high" onclick="selectPriorityChange('high')"><div class="status-opt-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#e85d5d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 5 22 19 22 12 2"/></svg></div><div><p class="status-opt-title">High</p><p class="status-opt-sub">Requires immediate attention</p></div><span class="status-check-icon hidden"><svg width="18" height="18" viewBox="0 0 24 24" fill="#2563eb"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5l-4-4 1.41-1.41L10 13.67l6.59-6.59L18 8.5l-8 8z"/></svg></span></div>
+        <div class="status-option status-opt-medium-prio" id="prio-opt-medium" onclick="selectPriorityChange('medium')"><div class="status-opt-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6v12"/><path d="M6 12h12"/></svg></div><div><p class="status-opt-title">Medium</p><p class="status-opt-sub">Schedule as normal</p></div><span class="status-check-icon hidden"><svg width="18" height="18" viewBox="0 0 24 24" fill="#2563eb"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5l-4-4 1.41-1.41L10 13.67l6.59-6.59L18 8.5l-8 8z"/></svg></span></div>
+        <div class="status-option status-opt-low-prio" id="prio-opt-low" onclick="selectPriorityChange('low')"><div class="status-opt-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/></svg></div><div><p class="status-opt-title">Low</p><p class="status-opt-sub">Can be scheduled normally</p></div><span class="status-check-icon hidden"><svg width="18" height="18" viewBox="0 0 24 24" fill="#2563eb"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5l-4-4 1.41-1.41L10 13.67l6.59-6.59L18 8.5l-8 8z"/></svg></span></div>
       </div>
       <div class="update-note"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><div><span class="update-note-title">Note: </span>Changing the priority will update how this job order is displayed.</div></div>
     </div>
@@ -458,10 +459,11 @@
         <div class="settings-field"><label class="settings-label">Quantity (QTY) <span class="req-star">*</span></label><input type="number" id="njo-qty" class="settings-input njo-qty-input" placeholder="Enter quantity" min="1"/></div>
         <div class="settings-field"><label class="settings-label">Priority Level <span class="req-star">*</span></label>
           <div class="priority-toggle-row">
-            <button type="button" class="priority-toggle-btn" id="prio-btn-urgent" onclick="selectPriority('urgent')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Urgent</button>
-            <button type="button" class="priority-toggle-btn" id="prio-btn-noturgent" onclick="selectPriority('noturgent')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Standard</button>
+            <button type="button" class="priority-toggle-btn" id="prio-btn-low" onclick="selectPriority('low')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/></svg>Low</button>
+            <button type="button" class="priority-toggle-btn" id="prio-btn-medium" onclick="selectPriority('medium')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6v12"/><path d="M6 12h12"/></svg>Medium</button>
+            <button type="button" class="priority-toggle-btn" id="prio-btn-high" onclick="selectPriority('high')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 5 22 19 22 12 2"/></svg>High</button>
           </div>
-          <p class="priority-hint" id="prio-hint">Select the urgency level for this job order.</p>
+          <p class="priority-hint" id="prio-hint">Select the priority level for this job order.</p>
         </div>
       </div>
     </div>
@@ -524,7 +526,7 @@
     <div class="modal-divider"></div>
     <div class="modal-body filter-body">
       <div class="filter-section"><h4 class="filter-section-title">Date Range</h4><div class="filter-date-row"><div class="filter-date-group"><label class="filter-date-label">From</label><input type="date" id="bp-filter-date-from" class="filter-date-input"/></div><div class="filter-date-group"><label class="filter-date-label">To</label><input type="date" id="bp-filter-date-to" class="filter-date-input"/></div></div></div>
-      <div class="filter-section"><h4 class="filter-section-title">Priority Level</h4><div class="filter-btn-group" id="bp-priority-group"><button class="filter-option-btn active" data-value="all" onclick="selectFilterOption('bp-priority-group',this)">All</button><button class="filter-option-btn" data-value="urgent" onclick="selectFilterOption('bp-priority-group',this)">Urgent</button><button class="filter-option-btn" data-value="noturgent" onclick="selectFilterOption('bp-priority-group',this)">Standard</button></div></div>
+      <div class="filter-section"><h4 class="filter-section-title">Priority Level</h4><div class="filter-btn-group" id="bp-priority-group"><button class="filter-option-btn active" data-value="all" onclick="selectFilterOption('bp-priority-group',this)">All</button><button class="filter-option-btn" data-value="high" onclick="selectFilterOption('bp-priority-group',this)">High</button><button class="filter-option-btn" data-value="medium" onclick="selectFilterOption('bp-priority-group',this)">Medium</button><button class="filter-option-btn" data-value="low" onclick="selectFilterOption('bp-priority-group',this)">Low</button></div></div>
       <div class="filter-section"><h4 class="filter-section-title">Material Requisition Status</h4><div class="filter-btn-group filter-btn-grid" id="bp-status-group"><button class="filter-option-btn active" data-value="all" onclick="selectFilterOption('bp-status-group',this)">All</button><button class="filter-option-btn" data-value="pending" onclick="selectFilterOption('bp-status-group',this)">Pending</button><button class="filter-option-btn" data-value="approved" onclick="selectFilterOption('bp-status-group',this)">Approved</button><button class="filter-option-btn" data-value="processing" onclick="selectFilterOption('bp-status-group',this)">Processing</button><button class="filter-option-btn" data-value="completed" onclick="selectFilterOption('bp-status-group',this)">Completed</button></div></div>
     </div>
     <div class="modal-divider"></div>
@@ -616,14 +618,14 @@ var cardStatuses = {
   'JO-2026-003':'completed','JO-2026-004':'pending'
 };
 var cardPriorities = {
-  'JO-2026-001':'urgent','JO-2026-002':'urgent',
-  'JO-2026-003':'noturgent','JO-2026-004':'noturgent'
+  'JO-2026-001':'high','JO-2026-002':'medium',
+  'JO-2026-003':'low','JO-2026-004':'medium'
 };
 
 var statusLabels = {pending:'Pending',approved:'Approved',processing:'Processing',completed:'Completed'};
 var statusBadgeClass = {pending:'badge-pending',approved:'badge-approved',processing:'badge-processing',completed:'badge-completed'};
-var priorityBadgeClass = {urgent:'badge-urgent',noturgent:'badge-doable'};
-var priorityLabel = {urgent:'Urgent',noturgent:'Standard'};
+var priorityBadgeClass = {high:'badge-urgent',medium:'badge-medium',low:'badge-doable'};
+var priorityLabel = {high:'High',medium:'Medium',low:'Low'};
 
 var njoCounter = 4;
 var njoPriority = null;
@@ -726,15 +728,18 @@ var dashboardView = 'cards';
 var dashboardSort = 'recent';
 
 function getPriorityRank(priority) {
-  return priority === 'urgent' ? 0 : 1;
+  if (priority === 'high') return 0;
+  if (priority === 'medium') return 1;
+  if (priority === 'low') return 2;
+  return 3;
 }
 
 function getSortIndicatorConfig(sort) {
   var config = {
     recent: { direction: 'desc', label: 'Recent first', directionLabel: 'descending' },
     oldest: { direction: 'asc', label: 'Oldest first', directionLabel: 'ascending' },
-    'priority-high': { direction: 'asc', label: 'Urgent first', directionLabel: 'ascending' },
-    'priority-low': { direction: 'desc', label: 'Standard first', directionLabel: 'descending' },
+    'priority-high': { direction: 'asc', label: 'High first', directionLabel: 'ascending' },
+    'priority-low': { direction: 'desc', label: 'Low first', directionLabel: 'descending' },
     status: { direction: 'asc', label: 'Status', directionLabel: 'ascending' },
     title: { direction: 'asc', label: 'Title A-Z', directionLabel: 'ascending' }
   };
@@ -762,8 +767,8 @@ function compareJobCards(cardA, cardB) {
   var mode = dashboardSort || 'recent';
   var dateA = cardA.dataset.date || '';
   var dateB = cardB.dataset.date || '';
-  var priorityA = cardA.dataset.priority || 'noturgent';
-  var priorityB = cardB.dataset.priority || 'noturgent';
+  var priorityA = cardA.dataset.priority || 'low';
+  var priorityB = cardB.dataset.priority || 'low';
   var statusA = cardA.dataset.status || 'pending';
   var statusB = cardB.dataset.status || 'pending';
   var titleA = (cardA.querySelector('.job-title') ? cardA.querySelector('.job-title').textContent : '').trim().toLowerCase();
@@ -813,7 +818,7 @@ function buildJobTableRow(card) {
   var vehicle = vehicleEl ? vehicleEl.textContent.trim() : '';
   var desc = descEl ? descEl.textContent.trim() : '';
   var date = formatDateForDisplay(card.dataset.date || '');
-  var priority = card.dataset.priority || 'noturgent';
+  var priority = card.dataset.priority || 'low';
   var status = card.dataset.status || 'pending';
   var priorityLabelText = priorityLabel[priority] || priority;
   var statusLabelText = statusLabels[status] || status;
@@ -842,7 +847,7 @@ function wireJobTableInteractions() {
         jobId,
         jobTitle,
         card.querySelector('.job-vehicle') ? card.querySelector('.job-vehicle').textContent.trim() : '',
-        card.dataset.priority || 'noturgent',
+        card.dataset.priority || 'low',
         formatDateForDisplay(card.dataset.date || ''),
         card.querySelector('.job-desc') ? card.querySelector('.job-desc').textContent.trim() : '',
         formatDateForDisplay(card.dataset.date || '')
@@ -999,7 +1004,7 @@ var currentPriorityId=null; var selectedPriorityVal=null;
 function openChangePriority(id, name) {
   currentPriorityId=id; selectedPriorityVal=null;
   document.getElementById('priority-modal-subtitle').textContent=id+' - '+name;
-  ['urgent','noturgent'].forEach(function(p){
+  ['high','medium','low'].forEach(function(p){
     var el=document.getElementById('prio-opt-'+p);
     el.classList.remove('selected-opt');
     el.querySelector('.status-check-icon').classList.add('hidden');
@@ -1010,7 +1015,7 @@ function openChangePriority(id, name) {
 }
 function selectPriorityChange(val) {
   selectedPriorityVal=val;
-  ['urgent','noturgent'].forEach(function(p){
+  ['high','medium','low'].forEach(function(p){
     var el=document.getElementById('prio-opt-'+p);
     el.classList.remove('selected-opt');
     el.querySelector('.status-check-icon').classList.add('hidden');
@@ -1154,12 +1159,14 @@ function closeConfirmJobOrder() {
 }
 function selectPriority(val) {
   njoPriority=val;
-  document.getElementById('prio-btn-urgent').classList.remove('prio-active-urgent');
-  document.getElementById('prio-btn-noturgent').classList.remove('prio-active-noturgent');
+  document.getElementById('prio-btn-high').classList.remove('prio-active-high');
+  document.getElementById('prio-btn-medium').classList.remove('prio-active-medium');
+  document.getElementById('prio-btn-low').classList.remove('prio-active-low');
   document.getElementById('prio-btn-'+val).classList.add('prio-active-'+val);
   var hint=document.getElementById('prio-hint');
-  if(val==='urgent'){hint.textContent='⚠ Marked as Urgent — this will be prioritized immediately.';hint.style.color='#e85d5d';}
-  else{hint.textContent='✓ Marked as Standard — will be scheduled normally.';hint.style.color='#6366f1';}
+  if(val==='high'){hint.textContent='⚠ High priority — this will be prioritized immediately.';hint.style.color='#e85d5d';}
+  else if(val==='medium'){hint.textContent='● Medium priority — this will be scheduled normally.';hint.style.color='#d97706';}
+  else{hint.textContent='✓ Low priority — will be scheduled normally.';hint.style.color='#6366f1';}
 }
 function formatDateForDisplay(v) {
   if(!v) return '';
@@ -1213,8 +1220,8 @@ function continueToReview() {
   document.getElementById('rv-desc').textContent=desc;
   document.getElementById('rv-purpose').textContent=purpose;
   var rp=document.getElementById('rv-priority');
-  rp.className='badge '+(njoPriority==='urgent'?'badge-urgent':'badge-doable');
-  rp.textContent=njoPriority==='urgent'?'Urgent':'Standard';
+  rp.className='badge '+(priorityBadgeClass[njoPriority]||'badge-doable');
+  rp.textContent=priorityLabel[njoPriority]||'Low';
   document.getElementById('new-jo-overlay').classList.add('hidden');
   document.getElementById('confirm-jo-overlay').classList.remove('hidden');
   document.getElementById('confirm-jo-box').scrollTop=0;
@@ -1242,7 +1249,8 @@ function submitJobOrder() {
   var sd=desc.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
   var sl=(dept+' — '+loc).replace(/\\/g,'\\\\').replace(/'/g,"\\'");
   var sp=purpose.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
-  var isU=priority==='urgent';
+  var isHigh = priority==='high';
+  var isMedium = priority==='medium';
   var dr = document.getElementById('njo-date-req').value;
   var drd = document.getElementById('njo-date-reqd').value;
   var code = document.getElementById('njo-item-code').value.trim();
@@ -1278,7 +1286,7 @@ function submitJobOrder() {
   var cardMrPriority = escapeAttr(priority);
   var html='<div class="job-card" id="card-'+newId+'" data-priority="'+priority+'" data-status="pending" data-date="'+dateReq+'" data-jo-driver="'+cardDriver+'" data-jo-date="'+cardJoDate+'" data-jo-number="'+newId+'" data-jo-location="'+cardLocation+'" data-jo-type="'+cardType+'" data-jo-plate="'+cardPlate+'" data-jo-complain="'+cardComplain+'" data-jo-encountered="'+cardEncountered+'" data-jo-reported-by="'+cardReportedBy+'" data-jo-estimated="'+cardEstimated+'" data-jo-inspected-by="'+cardInspectedBy+'" data-jo-ref="'+cardRef+'" data-jo-mechanic="'+cardMechanic+'" data-jo-total-hours="'+cardTotalHours+'" data-jo-trial-remarks="'+cardTrialRemarks+'" data-jo-conducted-by="'+cardConductedBy+'" data-jo-conducted-date="'+cardConductedDate+'" data-jo-accepted-by="'+cardAcceptedBy+'" data-jo-accepted-date="'+cardAcceptedDate+'" data-jo-work-details="'+cardWorkDetails+'" data-mr-dept="'+cardMrDept+'" data-mr-location="'+cardMrLocation+'" data-mr-date-req="'+cardMrDateReq+'" data-mr-date-reqd="'+cardMrDateReqd+'" data-mr-item-code="'+cardMrItemCode+'" data-mr-uom="'+cardMrUom+'" data-mr-qty="'+cardMrQty+'" data-mr-purpose="'+cardMrPurpose+'" data-mr-priority="'+cardMrPriority+'">'
     +'<div class="job-card-top"><div class="job-left">'
-    +'<div class="job-title-row"><h3 class="job-title">'+desc+'</h3><span class="badge '+(isU?'badge-urgent':'badge-doable')+'">'+(isU?'Urgent':'Standard')+'</span></div>'
+    +'<div class="job-title-row"><h3 class="job-title">'+desc+'</h3><span class="badge '+(isHigh?'badge-urgent':(isMedium?'badge-medium':'badge-doable'))+'">'+(isHigh?'High':(isMedium?'Medium':'Low'))+'</span></div>'
     +'<p class="job-vehicle">'+dept+' — '+loc+'</p>'
     +'<p class="job-desc">'+purpose+'</p>'
     +'<div class="job-meta">'
@@ -1296,9 +1304,10 @@ function submitJobOrder() {
   ['njo-dept','njo-location','njo-date-reqd','njo-item-code','njo-desc','njo-purpose','njo-qty'].forEach(function(id){document.getElementById(id).value='';});
   document.getElementById('njo-uom').value='';
   njoPriority=null;
-  document.getElementById('prio-btn-urgent').classList.remove('prio-active-urgent');
-  document.getElementById('prio-btn-noturgent').classList.remove('prio-active-noturgent');
-  document.getElementById('prio-hint').textContent='Select the urgency level for this job order.';
+  document.getElementById('prio-btn-high').classList.remove('prio-active-high');
+  document.getElementById('prio-btn-medium').classList.remove('prio-active-medium');
+  document.getElementById('prio-btn-low').classList.remove('prio-active-low');
+  document.getElementById('prio-hint').textContent='Select the priority level for this job order.';
   document.getElementById('prio-hint').style.color='#888';
   document.getElementById('no-results').classList.add('hidden');
   document.getElementById('confirm-jo-overlay').classList.add('hidden');
@@ -1446,7 +1455,7 @@ function getJobOrdersData(){
     var be=c.querySelector('.job-title-row .badge'); var rb=c.querySelector('.job-right .badge');
     data.push({id:id,title:te?te.textContent.trim():'',vehicle:ve?ve.textContent.trim():'',desc:de?de.textContent.trim():'',
       joId:mi[0]?mi[0].textContent.trim():id,date:mi[1]?mi[1].textContent.trim():'',rawDate:c.dataset.date||'',
-      priority:c.dataset.priority||'noturgent',status:c.dataset.status||'pending',
+      priority:c.dataset.priority||'low',status:c.dataset.status||'pending',
       priorityLabel:be?be.textContent.trim():'',statusLabel:rb?rb.textContent.trim():''});
   });
   return data;
@@ -1478,7 +1487,7 @@ function renderBatchList(){
   emptyEl.classList.add('hidden');
   listEl.innerHTML=filtered.map(function(j){
     var isSel=bpSelected.has(j.id);
-    var pc=j.priority==='urgent'?'badge-urgent':'badge-doable';
+    var pc=getBadgeClassByPriority(j.priority);
     var sc=statusBadgeClass[j.status]||'';
     return '<div class="bp-item'+(isSel?' bp-item-selected':'')+'" id="bpitem-'+j.id+'">'
       +'<div class="bp-item-info">'
@@ -1539,7 +1548,7 @@ function resetBpFilters(){
 }
 function updateBpFilterChips(){
   var chips=[];
-  if(bpFilters.priority!=='all')chips.push(bpFilters.priority==='urgent'?'Urgent':'Standard');
+  if(bpFilters.priority!=='all') chips.push(bpFilters.priority==='high' ? 'High' : bpFilters.priority==='medium' ? 'Medium' : 'Low');
   if(bpFilters.status!=='all')chips.push(statusLabels[bpFilters.status]||bpFilters.status);
   if(bpFilters.dateFrom)chips.push('From: '+bpFilters.dateFrom);
   if(bpFilters.dateTo)chips.push('To: '+bpFilters.dateTo);
@@ -1626,9 +1635,11 @@ function executeBatchPrint(){
     +'<tbody>';
 
   sel.forEach(function(j, idx){
-    var priorityBadge=j.priority==='urgent'
-      ?'<span class="badge-print badge-urgent-p">Urgent</span>'
-      :'<span class="badge-print badge-doable-p">Standard</span>';
+    var priorityBadge=j.priority==='high'
+      ?'<span class="badge-print badge-urgent-p">High</span>'
+      :j.priority==='medium'
+        ?'<span class="badge-print badge-medium-p">Medium</span>'
+        :'<span class="badge-print badge-doable-p">Low</span>';
     var statusMap={'approved':'badge-approved-p','processing':'badge-processing-p','pending':'badge-pending-p','rejected':'badge-rejected-p'};
     var sc=statusMap[j.status]||'badge-pending-p';
     var statusBadge='<span class="badge-print '+sc+'">'+j.statusLabel+'</span>';
