@@ -26,6 +26,7 @@
     </div>
     <h1 class="login-title">RequiSite</h1>
     <p class="login-subtitle">Motorpool-Warehouse Material Requisition System</p>
+    <span class="view-badge motorpool-badge">Motorpool View</span>
     <div class="login-form">
       <label class="form-label">Password</label>
       <input type="password" id="password" class="form-input" placeholder="Enter password" onkeydown="if(event.key==='Enter')handleLogin()"/>
@@ -1453,10 +1454,30 @@ function getJobOrdersData(){
     var te=c.querySelector('.job-title'); var ve=c.querySelector('.job-vehicle');
     var de=c.querySelector('.job-desc'); var mi=c.querySelectorAll('.meta-item');
     var be=c.querySelector('.job-title-row .badge'); var rb=c.querySelector('.job-right .badge');
-    data.push({id:id,title:te?te.textContent.trim():'',vehicle:ve?ve.textContent.trim():'',desc:de?de.textContent.trim():'',
-      joId:mi[0]?mi[0].textContent.trim():id,date:mi[1]?mi[1].textContent.trim():'',rawDate:c.dataset.date||'',
-      priority:c.dataset.priority||'low',status:c.dataset.status||'pending',
-      priorityLabel:be?be.textContent.trim():'',statusLabel:rb?rb.textContent.trim():''});
+    data.push({
+      id:id,
+      title:te?te.textContent.trim():'',
+      vehicle:ve?ve.textContent.trim():'',
+      desc:de?de.textContent.trim():'',
+      joId:mi[0]?mi[0].textContent.trim():id,
+      date:mi[1]?mi[1].textContent.trim():'',
+      rawDate:c.dataset.date||'',
+      priority:c.dataset.priority||'low',
+      status:c.dataset.status||'pending',
+      priorityLabel:be?be.textContent.trim():'',
+      statusLabel:rb?rb.textContent.trim():'',
+      model:c.dataset.joType||'',
+      plate:c.dataset.joPlate||'',
+      mechanic:c.dataset.joMechanic||'',
+      trialRemarks:c.dataset.joTrialRemarks||'',
+      mrDesc:c.dataset.mrDesc||'',
+      mrPurpose:c.dataset.mrPurpose||'',
+      mrItemCode:c.dataset.mrItemCode||'',
+      mrUom:c.dataset.mrUom||'',
+      mrQty:c.dataset.mrQty||'',
+      mrDateReq:c.dataset.mrDateReq||'',
+      mrDateReqd:c.dataset.mrDateReqd||''
+    });
   });
   return data;
 }
@@ -1568,11 +1589,11 @@ function executeBatchPrint(){
     +'.page{width:100%;max-width:900px;margin:0 auto;padding:28px 32px}'
     +'.report-header{display:flex;align-items:flex-start;justify-content:center;gap:14px;margin-bottom:6px}'
     +'.header-logo{width:48px;height:48px;object-fit:contain}'
-    +'.header-logo-placeholder{width:48px;height:48px;border-radius:14px;background:#2563eb;display:flex;align-items:center;justify-content:center;font-size:10px;color:#fff;font-weight:700;text-align:center;line-height:1.2;padding:6px}'
+    +'.header-logo-placeholder{width:48px;height:48px;border-radius:14px;background:transparent;display:flex;align-items:center;justify-content:center;font-size:10px;color:#111;font-weight:700;text-align:center;line-height:1.2;padding:6px;border:1px solid transparent;}'
     +'.header-logo-placeholder img{width:100%;height:100%;object-fit:contain;display:block}'
     +'.header-text{text-align:left}'
     +'.univ-name{font-size:17px;font-weight:700;color:#111;letter-spacing:0.3px}'
-    +'.report-title{font-size:12px;font-weight:600;color:#333;margin-top:2px}'
+    +'.report-title{font-size:10px;font-weight:600;color:#333;margin: 5px auto 0 auto;width: fit-content;}'
     +'.report-subtitle{font-size:10px;color:#555;margin-top:1px}'
     +'.report-type{font-size:13px;font-weight:700;color:#111;margin-top:3px;text-transform:uppercase;letter-spacing:0.5px}'
     +'.date-line{text-align:right;font-size:11px;color:#333;margin:10px 0 6px 0;font-weight:600}'
@@ -1609,10 +1630,9 @@ function executeBatchPrint(){
     +'<div class="report-header">'
     +'<div class="header-logo-placeholder"><img src="logo-vtlc.jpg" alt="VTLC Logo"></div>'
     +'<div class="header-text">'
-    +'<div class="univ-name">Vicente T. Lao Construction</div>'
-    +'<div class="report-title">REPORT ON JOB ORDERS</div>'
-    +'<div class="report-subtitle">Motorpool Management Division</div>'
-    +'<div class="report-type">JOB ORDER SUMMARY</div>'
+    +'<div class="univ-name">VICENTE T. LAO CONSTRUCTION</div>'
+    +'<div class="report-title">Panacan, Davao City</div>'
+    +'<div class="report-type">REPAIR ACTIVITY REPORT FOR EQUIPMENT</div>'
     +'</div>'
     +'</div>'
 
@@ -1623,14 +1643,16 @@ function executeBatchPrint(){
     // ---- TABLE ----
     +'<table>'
     +'<thead><tr>'
-    +'<th>#</th>'
+    +'<th>ISSUE DATE</th>'
+    +'<th>MODEL</th>'
     +'<th>JOB ORDER ID</th>'
-    +'<th>TITLE</th>'
-    +'<th>VEHICLE / DEPT</th>'
-    +'<th>DATE</th>'
-    +'<th>PRIORITY</th>'
-    +'<th>REQUISITION STATUS</th>'
-    +'<th>DESCRIPTION</th>'
+    +'<th>BODY/PLATE NUMBER</th>'
+    +'<th>SCOPE OF WORK</th>'
+    +'<th>PARTS NEEDED</th>'
+    +'<th>SERVICE MEN</th>'
+    +'<th>REMARKS</th>'
+    +'<th>FINISHED DATE</th>'
+    +'<th>STATUS</th>'
     +'</tr></thead>'
     +'<tbody>';
 
@@ -1643,15 +1665,25 @@ function executeBatchPrint(){
     var statusMap={'approved':'badge-approved-p','processing':'badge-processing-p','pending':'badge-pending-p','rejected':'badge-rejected-p'};
     var sc=statusMap[j.status]||'badge-pending-p';
     var statusBadge='<span class="badge-print '+sc+'">'+j.statusLabel+'</span>';
+    var issueDate=j.mrDateReq ? formatDateForDisplay(j.mrDateReq) : j.date;
+    var finishedDate=j.mrDateReqd ? formatDateForDisplay(j.mrDateReqd) : '';
+    var model=j.model||'';
+    var plate=j.plate||'';
+    var scopeOfWork=j.mrPurpose||j.desc||'';
+    var partsNeeded=j.mrDesc ? j.mrDesc + (j.mrQty ? ' ('+j.mrQty+' '+j.mrUom+')' : '') : j.mrItemCode || '';
+    var serviceMen=j.mechanic||'';
+    var remarks=j.trialRemarks||j.desc||'';
     h+='<tr>'
-      +'<td>'+(idx+1)+'</td>'
+      +'<td>'+issueDate+'</td>'
+      +'<td>'+model+'</td>'
       +'<td>'+j.joId+'</td>'
-      +'<td class="td-left">'+j.title+'</td>'
-      +'<td class="td-left">'+j.vehicle+'</td>'
-      +'<td>'+j.date+'</td>'
-      +'<td>'+priorityBadge+'</td>'
+      +'<td>'+plate+'</td>'
+      +'<td class="td-left">'+scopeOfWork+'</td>'
+      +'<td class="td-left">'+partsNeeded+'</td>'
+      +'<td>'+serviceMen+'</td>'
+      +'<td class="td-left">'+remarks+'</td>'
+      +'<td>'+finishedDate+'</td>'
       +'<td>'+statusBadge+'</td>'
-      +'<td class="td-left">'+j.desc+'</td>'
       +'</tr>';
   });
 
@@ -1661,7 +1693,7 @@ function executeBatchPrint(){
 
     // ---- FOOTER SIGNATURES ----
     +'<div class="footer-sig">'
-    +'<div class="sig-block"><div class="sig-label">Prepared by:</div><div class="sig-name">Motorpool Staff</div><div class="sig-role">Technical Staff</div></div>'
+    +'<div class="sig-block"><div class="sig-label">Prepared by:</div><div class="sig-name">Motorpool Supervisor</div><div class="sig-role"></div></div>'
     +'</div>'
 
     +'</div>'
